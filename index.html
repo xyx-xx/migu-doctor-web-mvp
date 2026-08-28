@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17312f">
+  <meta name="description" content="咪咕医生宠物健康 Web MVP：帮助宠物主人整理症状、识别危险信号并准备就医信息。">
+  <title>咪咕医生｜宠物健康初筛助手</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="eyebrow">咪咕医生 · PET CARE GUIDE</p>
+        <h1 id="home-title">宠物不舒服时，先把情况说清楚</h1>
+        <p class="hero-text">从危险信号、基础信息到症状变化，一步步整理关键线索，帮助你更快判断下一步该观察、联系兽医，还是立即就医。</p>
+      </div>
+      <img class="hero-visual" src="home.png" alt="戴着听诊器的宠物医生插画">
+      <span class="hero-note">先分流，再沟通</span>
+    </section>
+
+    <section class="section-block" aria-labelledby="action-title">
+      <div class="section-heading">
+        <h2 id="action-title">你现在需要什么？</h2>
+        <p>选择最接近的情况</p>
+      </div>
+      <div class="action-grid">
+        <a class="action-card primary" href="consult.html">
+          <span class="action-arrow" aria-hidden="true">→</span>
+          <span class="action-icon" aria-hidden="true">🩺</span>
+          <h3>症状初筛</h3>
+          <p>先排查紧急信号，再整理宠物信息和症状变化，为后续咨询或就医做好准备。</p>
+        </a>
+        <a class="action-card" href="toxin.html">
+          <span class="action-arrow" aria-hidden="true">→</span>
+          <span class="action-icon" aria-hidden="true">⚗️</span>
+          <h3>误食风险</h3>
+          <p>记录误食物、时间与大致剂量，了解需要立即联系兽医的情况。</p>
+        </a>
+        <a class="action-card" href="wiki.html">
+          <span class="action-arrow" aria-hidden="true">→</span>
+          <span class="action-icon" aria-hidden="true">📖</span>
+          <h3>养宠百科</h3>
+          <p>查询常见护理与健康知识，获得便于理解的科普信息。</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="triage-title">
+      <div class="section-heading">
+        <h2 id="triage-title">三段风险分流</h2>
+        <p>结果是行动提示，不是诊断</p>
+      </div>
+      <div class="triage-ribbon">
+        <div class="triage-state">
+          <strong>继续观察</strong>
+          <span>记录饮食、精神和症状变化，必要时预约兽医。</span>
+        </div>
+        <div class="triage-state">
+          <strong>尽快联系兽医</strong>
+          <span>症状持续、加重或宠物状态异常时，尽快获得专业判断。</span>
+        </div>
+        <div class="triage-state">
+          <strong>立即就医</strong>
+          <span>呼吸困难、抽搐、失去意识或大量出血时，不要等待线上回复。</span>
+        </div>
+      </div>
+      <div class="safety-note" role="note">
+        <strong>医疗免责声明：</strong>咪咕医生仅用于宠物健康信息整理与科普，不提供诊断、处方或急救替代方案，任何结果都不能替代执业兽医的面诊判断。出现紧急信号时请立即联系附近宠物医院。
+      </div>
+    </section>
+
+    <p class="footer-note">Web MVP · 请勿将本工具用于延误就医或自行用药</p>
+  </main>
+</body>
+</html>

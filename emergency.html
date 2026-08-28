@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff0ed">
+  <meta name="description" content="宠物危险信号提示：立即联系兽医并前往附近宠物医院。">
+  <title>请立即联系兽医｜咪咕医生</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="back-link" href="consult.html" aria-label="返回症状初筛">←</a>
+      <div class="topbar-main">
+        <span class="brand-mark">咪咕医生</span>
+      </div>
+    </header>
+
+    <section class="emergency-panel" aria-labelledby="emergency-title">
+      <span class="signal">紧急分流</span>
+      <h1 id="emergency-title">请立即联系兽医，不要继续等待</h1>
+      <p>你勾选了可能危及生命或需要快速处置的信号。此页面不进行 AI 分析，也不会给出线上诊断；请现在联系宠物医院并准备出发。</p>
+
+      <div id="symptomList" class="symptom-list" aria-label="已选择的危险信号"></div>
+
+      <a class="button-danger" href="https://www.amap.com/search?query=24小时宠物医院" target="_blank" rel="noopener noreferrer">导航附近 24 小时宠物医院</a>
+    </section>
+
+    <section class="page-card" aria-labelledby="action-title">
+      <h2 id="action-title">现在按这个顺序做</h2>
+      <div class="summary-list">
+        <div class="summary-row"><span>第一步</span><span>立即电话联系附近宠物医院，说明危险信号、开始时间和宠物基本信息。</span></div>
+        <div class="summary-row"><span>第二步</span><span>保持宠物周围安全、安静，按医院电话指导转运；如持续出血，可用干净纱布轻压。</span></div>
+        <div class="summary-row"><span>第三步</span><span>携带病历、正在使用的药物及疑似误食物包装，尽快前往医院。</span></div>
+      </div>
+    </section>
+
+    <div class="safety-note" role="alert">
+      <strong>不要自行处理：</strong>不要擅自喂药、催吐、强行喂水或喂食，也不要因为症状暂时缓解而延误就医。抽搐时不要把手或物品放进宠物嘴里。
+    </div>
+
+    <div class="button-row">
+      <a class="button-secondary" href="consult.html">返回核对填写内容</a>
+      <a class="button" href="index.html">返回首页</a>
+    </div>
+
+    <p class="footer-note">本页为确定性安全分流，不调用 AI；具体急救方式请遵循执业兽医的实时指导。</p>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const list = MiguApp.getStoredJson("emergencySymptoms", []);
+      const container = document.getElementById("symptomList");
+      const signals = Array.isArray(list) && list.length
+        ? list
+        : ["尚未记录具体危险信号；如宠物状态危急，请直接联系医院"];
+
+      signals.forEach((signal) => {
+        const chip = document.createElement("div");
+        chip.className = "symptom-chip";
+        chip.textContent = signal;
+        container.appendChild(chip);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f2f6f4">
+  <meta name="description" content="咪咕医生症状初筛：分步整理宠物危险信号、基础信息与症状详情。">
+  <title>症状初筛｜咪咕医生</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="back-link" href="index.html" aria-label="返回首页">←</a>
+      <div class="topbar-main">
+        <h1>症状初筛</h1>
+        <p>预计 2 分钟，填写内容会保存在本机</p>
+      </div>
+    </header>
+
+    <nav class="stepper" aria-label="问诊填写进度">
+      <span class="step-item active" data-step-label="1" aria-current="step">1 · 紧急信号</span>
+      <span class="step-item" data-step-label="2">2 · 宠物信息</span>
+      <span class="step-item" data-step-label="3">3 · 症状详情</span>
+    </nav>
+
+    <form id="consultForm" novalidate>
+      <section class="page-card form-step" data-step="1" aria-labelledby="step-one-title">
+        <h2 id="step-one-title">先确认有没有危险信号</h2>
+        <p class="card-intro">只要符合其中一项，就先停止线上填写并立即联系兽医。没有则直接继续。</p>
+        <div class="check-list" role="group" aria-label="宠物紧急信号">
+          <label class="check-item"><input type="checkbox" name="emergency" value="抽搐"><span>全身发抖或抽搐</span></label>
+          <label class="check-item"><input type="checkbox" name="emergency" value="呼吸困难"><span>呼吸困难、张口喘气或舌头发紫</span></label>
+          <label class="check-item"><input type="checkbox" name="emergency" value="站不起来"><span>突然站不起来、无法行走或明显瘫软</span></label>
+          <label class="check-item"><input type="checkbox" name="emergency" value="叫不醒"><span>叫不醒、失去意识或反应极弱</span></label>
+          <label class="check-item"><input type="checkbox" name="emergency" value="大量出血"><span>大量出血或持续按压仍无法止血</span></label>
+        </div>
+        <div class="safety-note">如无法判断是否属于紧急情况，优先电话咨询附近宠物医院；不要等待本工具给出结论。</div>
+        <div class="button-row">
+          <button class="button" type="button" data-next>以上都确认了，继续</button>
+        </div>
+      </section>
+
+      <section class="page-card form-step" data-step="2" aria-labelledby="step-two-title" hidden>
+        <h2 id="step-two-title">告诉我们宠物的基本情况</h2>
+        <p class="card-intro">这些信息会影响风险判断。暂时不知道的内容可以选择“不知道”。</p>
+        <div class="field-grid">
+          <div class="field">
+            <label for="petType">种类</label>
+            <select id="petType" name="petType">
+              <option value="猫">猫</option>
+              <option value="狗">狗</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="petBreed">品种（选填）</label>
+            <input id="petBreed" name="petBreed" type="text" maxlength="40" placeholder="如：英短、金毛" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="petAge">年龄</label>
+            <input id="petAge" name="petAge" type="number" value="1" min="0" max="40" step="1" inputmode="decimal" required>
+          </div>
+          <div class="field">
+            <label for="petAgeUnit">年龄单位</label>
+            <select id="petAgeUnit" name="petAgeUnit">
+              <option value="岁">岁</option>
+              <option value="个月">个月</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="petWeight">体重（kg）</label>
+            <input id="petWeight" name="petWeight" type="number" value="5" min="0.1" max="150" step="0.1" inputmode="decimal" required>
+            <small>不知道准确体重时，可填写最近一次称重结果。</small>
+          </div>
+          <div class="field">
+            <label for="petGender">性别</label>
+            <select id="petGender" name="petGender">
+              <option value="男孩">男孩</option>
+              <option value="女孩">女孩</option>
+              <option value="不知道">不知道</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="petNeutered">是否绝育</label>
+            <select id="petNeutered" name="petNeutered">
+              <option value="是">是</option>
+              <option value="否">否</option>
+              <option value="不知道">不知道</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="petHistory">基础疾病或过敏史（选填）</label>
+            <textarea id="petHistory" name="petHistory" maxlength="300" placeholder="如：慢性肾病、对某种药物过敏；没有可不填"></textarea>
+          </div>
+        </div>
+        <div class="button-row">
+          <button class="button-secondary" type="button" data-back>上一步</button>
+          <button class="button" type="button" data-next>继续填写症状</button>
+        </div>
+      </section>
+
+      <section class="page-card form-step" data-step="3" aria-labelledby="step-three-title" hidden>
+        <h2 id="step-three-title">描述这次的症状</h2>
+        <p class="card-intro">尽量写清楚“什么时候开始、发生了什么、有没有变严重”。</p>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="symptom">主要症状</label>
+            <textarea id="symptom" name="symptom" maxlength="500" placeholder="如：今天早上开始反复呕吐，精神比平时差" required></textarea>
+          </div>
+          <div class="field full">
+            <label for="duration">持续多久了</label>
+            <select id="duration" name="duration">
+              <option value="今天才有">今天才有</option>
+              <option value="2-3天">2–3 天</option>
+              <option value="超过一周">超过一周</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="eating">进食情况</label>
+            <select id="eating" name="eating">
+              <option value="正常吃">正常吃</option>
+              <option value="吃得少">吃得少</option>
+              <option value="完全不吃">完全不吃</option>
+              <option value="不确定">不确定</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="drinking">饮水情况</label>
+            <select id="drinking" name="drinking">
+              <option value="正常喝">正常喝</option>
+              <option value="喝得少">喝得少</option>
+              <option value="完全不喝">完全不喝</option>
+              <option value="不确定">不确定</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="toilet">大小便情况</label>
+            <select id="toilet" name="toilet">
+              <option value="正常">正常</option>
+              <option value="减少">减少</option>
+              <option value="完全没有">完全没有</option>
+              <option value="形状/颜色异常">形状或颜色异常</option>
+              <option value="不确定">不确定</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="other">其他异常（选填）</label>
+            <textarea id="other" name="other" maxlength="300" placeholder="如：没精神、躲起来、呕吐或叫声异常"></textarea>
+          </div>
+          <div class="field full">
+            <label for="recent">近期特殊情况（选填）</label>
+            <textarea id="recent" name="recent" maxlength="300" placeholder="如：换粮、外出、接触其他动物或使用新药"></textarea>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <strong>提交前确认：</strong>
+          <div id="consultSummary" class="summary-list" aria-live="polite"></div>
+        </div>
+        <div id="formError" class="error-state" role="alert" hidden></div>
+        <div class="button-row">
+          <button class="button-secondary" type="button" data-back>上一步</button>
+          <button class="button" type="submit">开始整理问诊信息</button>
+        </div>
+      </section>
+    </form>
+
+    <p class="footer-note">本工具不提供诊断或处方；宠物状态明显恶化时请直接联系执业兽医。</p>
+  </main>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const form = document.getElementById("consultForm");
+      const steps = Array.from(document.querySelectorAll(".form-step"));
+      const labels = Array.from(document.querySelectorAll("[data-step-label]"));
+      const errorBox = document.getElementById("formError");
+      const draftKey = "consultDraft";
+      let currentStep = 1;
+
+      function checkedEmergencySignals() {
+        return Array.from(document.querySelectorAll('input[name="emergency"]:checked'))
+          .map((input) => input.value);
+      }
+
+      function readDraft() {
+        return {
+          emergency: checkedEmergencySignals(),
+          petType: document.getElementById("petType").value,
+          petBreed: document.getElementById("petBreed").value.trim(),
+          petAge: document.getElementById("petAge").value,
+          petAgeUnit: document.getElementById("petAgeUnit").value,
+          petWeight: document.getElementById("petWeight").value,
+          petGender: document.getElementById("petGender").value,
+          petNeutered: document.getElementById("petNeutered").value,
+          petHistory: document.getElementById("petHistory").value.trim(),
+          symptom: document.getElementById("symptom").value.trim(),
+          duration: document.getElementById("duration").value,
+          eating: document.getElementById("eating").value,
+          drinking: document.getElementById("drinking").value,
+          toilet: document.getElementById("toilet").value,
+          other: document.getElementById("other").value.trim(),
+          recent: document.getElementById("recent").value.trim()
+        };
+      }
+
+      function saveDraft() {
+        MiguApp.setStoredJson(draftKey, readDraft());
+      }
+
+      function restoreDraft() {
+        const draft = MiguApp.getStoredJson(draftKey, null);
+        if (!draft || typeof draft !== "object") return;
+
+        Object.entries(draft).forEach(([key, value]) => {
+          if (key === "emergency" || value === null || value === undefined) return;
+          const control = document.getElementById(key);
+          if (control) control.value = String(value);
+        });
+
+        if (Array.isArray(draft.emergency)) {
+          const selected = new Set(draft.emergency);
+          document.querySelectorAll('input[name="emergency"]').forEach((input) => {
+            input.checked = selected.has(input.value);
+          });
+        }
+      }
+
+      function setStep(stepNumber) {
+        currentStep = Math.min(3, Math.max(1, stepNumber));
+        steps.forEach((step) => {
+          step.hidden = Number(step.dataset.step) !== currentStep;
+        });
+        labels.forEach((label) => {
+          const active = Number(label.dataset.stepLabel) === currentStep;
+          label.classList.toggle("active", active);
+          if (active) label.setAttribute("aria-current", "step");
+          else label.removeAttribute("aria-current");
+        });
+        if (currentStep === 3) updateSummary();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function showError(message, control) {
+        errorBox.textContent = message;
+        errorBox.hidden = false;
+        if (control) control.focus();
+      }
+
+      function clearError() {
+        errorBox.textContent = "";
+        errorBox.hidden = true;
+      }
+
+      function validatePetInfo() {
+        const age = document.getElementById("petAge");
+        const weight = document.getElementById("petWeight");
+        const ageNumber = Number(age.value);
+        const weightNumber = Number(weight.value);
+
+        if (age.value === "" || !Number.isFinite(ageNumber) || ageNumber < 0 || ageNumber > 40) {
+          window.alert("请填写 0–40 之间的宠物年龄。");
+          age.focus();
+          return false;
+        }
+        if (weight.value === "" || !Number.isFinite(weightNumber) || weightNumber <= 0 || weightNumber > 150) {
+          window.alert("请填写 0.1–150 kg 之间的宠物体重。");
+          weight.focus();
+          return false;
+        }
+        return true;
+      }
+
+      function addSummaryRow(label, value) {
+        const row = document.createElement("div");
+        row.className = "summary-row";
+        const key = document.createElement("span");
+        const content = document.createElement("span");
+        key.textContent = label;
+        content.textContent = value;
+        row.append(key, content);
+        document.getElementById("consultSummary").appendChild(row);
+      }
+
+      function updateSummary() {
+        const data = readDraft();
+        const summary = document.getElementById("consultSummary");
+        summary.replaceChildren();
+        const identity = [data.petType, data.petBreed || "品种未知", data.petAge + data.petAgeUnit, data.petWeight + " kg"].join(" · ");
+        addSummaryRow("宠物", identity);
+        addSummaryRow("主要症状", data.symptom || "尚未填写");
+        addSummaryRow("持续时间", data.duration);
+      }
+
+      document.querySelectorAll("[data-next]").forEach((button) => {
+        button.addEventListener("click", () => {
+          saveDraft();
+          if (currentStep === 1) {
+            const signals = checkedEmergencySignals();
+            if (signals.length) {
+              MiguApp.setStoredJson("emergencySymptoms", signals);
+              window.location.href = "emergency.html";
+              return;
+            }
+          }
+          if (currentStep === 2 && !validatePetInfo()) return;
+          setStep(currentStep + 1);
+        });
+      });
+
+      document.querySelectorAll("[data-back]").forEach((button) => {
+        button.addEventListener("click", () => {
+          saveDraft();
+          clearError();
+          setStep(currentStep - 1);
+        });
+      });
+
+      form.addEventListener("input", () => {
+        saveDraft();
+        if (currentStep === 3) updateSummary();
+      });
+      form.addEventListener("change", () => {
+        saveDraft();
+        if (currentStep === 3) updateSummary();
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearError();
+        if (!validatePetInfo()) {
+          setStep(2);
+          return;
+        }
+
+        const data = readDraft();
+        if (!data.symptom) {
+          showError("请填写主要症状，并尽量说明开始时间和变化。", document.getElementById("symptom"));
+          return;
+        }
+
+        const consultData = {
+          petType: data.petType,
+          petBreed: data.petBreed || "未知",
+          petAge: data.petAge,
+          petAgeUnit: data.petAgeUnit,
+          petWeight: data.petWeight,
+          petGender: data.petGender,
+          petNeutered: data.petNeutered,
+          petHistory: data.petHistory || "无",
+          symptom: data.symptom,
+          duration: data.duration,
+          eating: data.eating,
+          drinking: data.drinking,
+          toilet: data.toilet,
+          other: data.other || "无",
+          recent: data.recent || "无"
+        };
+
+        MiguApp.setStoredJson("consultData", consultData);
+        saveDraft();
+        window.location.href = "chat.html";
+      });
+
+      restoreDraft();
+      setStep(1);
+    })();
+  </script>
+</body>
+</html>

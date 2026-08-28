@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.claude/logs/
+.claude/commands/merge.md
+# 早期 Streamlit 探索版保留在本地，不纳入当前 Web MVP。
+app.py
+*.log

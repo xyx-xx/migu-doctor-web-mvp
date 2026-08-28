@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "deny": [
+      "git push --force",
+      "rm -rf",
+      "git reset --hard",
+      "git clean -fd",
+      "sudo"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "echo '💡 复杂需求请先输入 /plan 或说\"进入计划模式\"，先想清楚再动手'"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '📝 文件已修改，记得运行 /update-docs 更新项目文档'"
+          }
+        ]
+      }
+    ]
+  }
+}
