@@ -4,65 +4,97 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#fff0ed">
-  <meta name="description" content="宠物危险信号提示：立即联系兽医并前往附近宠物医院。">
-  <title>请立即联系兽医｜咪咕医生</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta name="description" content="咪咕医生确定性紧急分流：查看危险信号、联系可接诊宠物医院并准备出发。">
+  <meta name="referrer" content="no-referrer">
+  <title>立即联系宠物医院｜咪咕医生</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css?v=20260828">
 </head>
 <body>
   <main class="app-shell">
-    <header class="topbar">
-      <a class="back-link" href="consult.html" aria-label="返回症状初筛">←</a>
-      <div class="topbar-main">
-        <span class="brand-mark">咪咕医生</span>
-      </div>
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="咪咕医生首页">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 10.2c-1.5-.6-2.2-2.2-1.6-3.5.5-1.2 1.8-1.7 3-.9 1.1.7 1.4 2.5.6 3.7M16.8 10.2c1.5-.6 2.2-2.2 1.6-3.5-.5-1.2-1.8-1.7-3-.9-1.1.7-1.4 2.5-.6 3.7"/><path d="M12 9.2c-3.4 0-6.4 2.5-6.4 5.5 0 2.1 1.6 3.6 3.7 3.6 1.1 0 1.8-.5 2.7-.5s1.6.5 2.7.5c2.1 0 3.7-1.5 3.7-3.6 0-3-3-5.5-6.4-5.5Z"/><path d="M12 13.1v2.2M10.9 14.2h2.2"/></svg>
+        </span>
+        <span class="wordmark-copy"><strong>咪咕医生</strong><span>PET TRIAGE GUIDE</span></span>
+      </a>
+      <span class="service-badge is-local" aria-label="确定性安全提示，不使用 AI"><span>确定性安全提示 · 不使用 AI</span></span>
     </header>
 
-    <section class="emergency-panel" aria-labelledby="emergency-title">
-      <span class="signal">紧急分流</span>
-      <h1 id="emergency-title">请立即联系兽医，不要继续等待</h1>
-      <p>你勾选了可能危及生命或需要快速处置的信号。此页面不进行 AI 分析，也不会给出线上诊断；请现在联系宠物医院并准备出发。</p>
+    <header class="page-header">
+      <a class="back-link" href="consult.html" aria-label="返回症状风险分流">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div class="page-title"><h1>紧急行动指引</h1><p>先确认医院可接诊，再按院方指导转运</p></div>
+      <div class="page-actions"><button class="text-button" id="copyEmergency" type="button">复制给医院</button></div>
+    </header>
 
-      <div id="symptomList" class="symptom-list" aria-label="已选择的危险信号"></div>
-
-      <a class="button-danger" href="https://www.amap.com/search?query=24小时宠物医院" target="_blank" rel="noopener noreferrer">导航附近 24 小时宠物医院</a>
-    </section>
-
-    <section class="page-card" aria-labelledby="action-title">
-      <h2 id="action-title">现在按这个顺序做</h2>
-      <div class="summary-list">
-        <div class="summary-row"><span>第一步</span><span>立即电话联系附近宠物医院，说明危险信号、开始时间和宠物基本信息。</span></div>
-        <div class="summary-row"><span>第二步</span><span>保持宠物周围安全、安静，按医院电话指导转运；如持续出血，可用干净纱布轻压。</span></div>
-        <div class="summary-row"><span>第三步</span><span>携带病历、正在使用的药物及疑似误食物包装，尽快前往医院。</span></div>
+    <section class="emergency-panel" aria-labelledby="emergency-title" role="alert">
+      <span class="emergency-signal">EMERGENCY ROUTE</span>
+      <h2 id="emergency-title">请现在联系宠物医院，不要继续等待线上分析</h2>
+      <p>你选择或描述了可能需要快速处置的信号。这里不做诊断，也不等待 AI；请查找能够接诊的医院，电话说明情况并准备出发。</p>
+      <div class="emergency-actions">
+        <a class="button-danger" href="https://www.amap.com/search?query=24%E5%B0%8F%E6%97%B6%E5%AE%A0%E7%89%A9%E5%8C%BB%E9%99%A2" target="_blank" rel="noopener noreferrer">在地图中搜索 24 小时宠物医院</a>
+        <a class="button-secondary" href="consult.html?new=1">情况稳定后重新填写</a>
       </div>
+      <div id="symptomList" class="symptom-list" aria-label="本次记录的危险信号"></div>
     </section>
 
-    <div class="safety-note" role="alert">
-      <strong>不要自行处理：</strong>不要擅自喂药、催吐、强行喂水或喂食，也不要因为症状暂时缓解而延误就医。抽搐时不要把手或物品放进宠物嘴里。
+    <section class="section-block page-card" aria-labelledby="action-title">
+      <div class="page-card-head">
+        <div>
+          <p class="card-kicker">LEAVE-NOW CHECKLIST</p>
+          <h2 id="action-title">现在按这个顺序做</h2>
+          <p class="card-intro">不同医院的夜间接诊能力可能不同，地图结果不代表一定营业或能够处理急症。</p>
+        </div>
+      </div>
+      <ol class="action-timeline">
+        <li class="timeline-item"><span class="timeline-index">01</span><div class="timeline-content"><strong>电话确认能够接诊</strong><p>说明猫或狗、危险信号、开始时间和是否正在恶化；询问是否有急诊能力、应前往哪个入口，以及途中需要怎么做。</p></div></li>
+        <li class="timeline-item"><span class="timeline-index">02</span><div class="timeline-content"><strong>按医院指导安全转运</strong><p>尽量保持环境安静并减少无谓搬动。呼吸困难、严重外伤、抽搐或意识异常时，不要自行尝试复杂急救。</p></div></li>
+        <li class="timeline-item"><span class="timeline-index">03</span><div class="timeline-content"><strong>带齐能帮助判断的信息</strong><p>携带病历、正在使用的药物，以及疑似误食物的原包装或成分照片；记下症状开始时间和变化。</p></div></li>
+      </ol>
+    </section>
+
+    <div class="safety-note section-block" role="alert">
+      <strong>不要自行处理：</strong>不要擅自喂药、催吐、强行喂食喂水，也不要因暂时缓解而取消联系医院。抽搐时不要把手或物品放进宠物嘴里；疑似误食时保留包装，并按医院指导处理。
     </div>
 
-    <div class="button-row">
-      <a class="button-secondary" href="consult.html">返回核对填写内容</a>
-      <a class="button" href="index.html">返回首页</a>
-    </div>
-
-    <p class="footer-note">本页为确定性安全分流，不调用 AI；具体急救方式请遵循执业兽医的实时指导。</p>
+    <p class="footer-note"><span>本页只提供分流与出发准备，不替代执业兽医的实时急救指导。</span></p>
   </main>
 
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=20260828"></script>
   <script>
     (function () {
       "use strict";
-      const list = MiguApp.getStoredJson("emergencySymptoms", []);
-      const container = document.getElementById("symptomList");
-      const signals = Array.isArray(list) && list.length
-        ? list
-        : ["尚未记录具体危险信号；如宠物状态危急，请直接联系医院"];
+      const { byId, copyText, formatDateTime, getStoredJson } = window.MiguApp;
+      const freshRoute = new URLSearchParams(window.location.search).get("fresh") === "1";
+      const stored = freshRoute ? [] : getStoredJson("emergencySymptoms", []);
+      const signals = Array.isArray(stored) && stored.length
+        ? stored.map(String).slice(0, 8)
+        : ["尚未记录具体信号；如果宠物状态危急或你拿不准，请直接联系可接诊医院"];
+      const container = byId("symptomList");
 
       signals.forEach((signal) => {
         const chip = document.createElement("div");
         chip.className = "symptom-chip";
         chip.textContent = signal;
         container.appendChild(chip);
+      });
+
+      byId("copyEmergency").addEventListener("click", async () => {
+        const text = [
+          "咪咕医生 · 紧急就诊沟通信息",
+          `生成时间：${formatDateTime(new Date())}`,
+          "",
+          "需要尽快确认是否可以接诊，当前记录的危险信号：",
+          ...signals.map((signal, index) => `${index + 1}. ${signal}`),
+          "",
+          "请告知应该前往的地点，以及途中需要遵循的注意事项。",
+        ].join("\n");
+        const copied = await copyText(text);
+        byId("copyEmergency").textContent = copied ? "已复制，可发给医院" : "复制失败，请长按信号";
+        window.setTimeout(() => { byId("copyEmergency").textContent = "复制给医院"; }, 1900);
       });
     })();
   </script>

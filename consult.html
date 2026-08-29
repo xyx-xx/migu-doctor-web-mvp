@@ -3,271 +3,302 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f2f6f4">
-  <meta name="description" content="咪咕医生症状初筛：分步整理宠物危险信号、基础信息与症状详情。">
-  <title>症状初筛｜咪咕医生</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <meta name="theme-color" content="#fbf3ec">
+  <meta name="description" content="咪咕医生症状风险分流：先确认猫狗危险信号，再整理宠物资料和症状变化。">
+  <title>症状风险分流｜咪咕医生</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css?v=20260828">
 </head>
 <body>
   <main class="app-shell">
-    <header class="topbar">
-      <a class="back-link" href="index.html" aria-label="返回首页">←</a>
-      <div class="topbar-main">
-        <h1>症状初筛</h1>
-        <p>预计 2 分钟，填写内容会保存在本机</p>
+    <header class="site-header">
+      <a class="wordmark" href="index.html" aria-label="咪咕医生首页">
+        <span class="brand-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 10.2c-1.5-.6-2.2-2.2-1.6-3.5.5-1.2 1.8-1.7 3-.9 1.1.7 1.4 2.5.6 3.7M16.8 10.2c1.5-.6 2.2-2.2 1.6-3.5-.5-1.2-1.8-1.7-3-.9-1.1.7-1.4 2.5-.6 3.7"/><path d="M12 9.2c-3.4 0-6.4 2.5-6.4 5.5 0 2.1 1.6 3.6 3.7 3.6 1.1 0 1.8-.5 2.7-.5s1.6.5 2.7.5c2.1 0 3.7-1.5 3.7-3.6 0-3-3-5.5-6.4-5.5Z"/><path d="M12 13.1v2.2M10.9 14.2h2.2"/></svg>
+        </span>
+        <span class="wordmark-copy"><strong>咪咕医生</strong><span>PET TRIAGE GUIDE</span></span>
+      </a>
+      <span class="service-badge" data-service-status><span data-service-label>正在检查服务</span></span>
+    </header>
+
+    <header class="page-header">
+      <a class="back-link" href="index.html" aria-label="返回首页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div class="page-title"><h1>症状风险分流</h1><p>大约 3–5 分钟 · 本次问诊资料在当前浏览器保留 24 小时</p></div>
+      <div class="page-actions">
+        <button class="text-button" id="demoButton" type="button" hidden>载入演示案例</button>
+        <button class="text-button" id="clearDraft" type="button">清除本次问诊</button>
       </div>
     </header>
 
-    <nav class="stepper" aria-label="问诊填写进度">
-      <span class="step-item active" data-step-label="1" aria-current="step">1 · 紧急信号</span>
-      <span class="step-item" data-step-label="2">2 · 宠物信息</span>
-      <span class="step-item" data-step-label="3">3 · 症状详情</span>
-    </nav>
+    <div class="stepper-shell" aria-label="填写进度">
+      <div class="stepper-meta"><strong id="stepMeta">第 1 步，共 3 步</strong><span id="stepHint">先排除不能等待的情况</span></div>
+      <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+      <nav class="stepper">
+        <span class="step-item active" data-step-label="1" aria-current="step">危险信号</span>
+        <span class="step-item" data-step-label="2">宠物资料</span>
+        <span class="step-item" data-step-label="3">症状变化</span>
+      </nav>
+    </div>
 
     <form id="consultForm" novalidate>
       <section class="page-card form-step" data-step="1" aria-labelledby="step-one-title">
-        <h2 id="step-one-title">先确认有没有危险信号</h2>
-        <p class="card-intro">只要符合其中一项，就先停止线上填写并立即联系兽医。没有则直接继续。</p>
-        <div class="check-list" role="group" aria-label="宠物紧急信号">
-          <label class="check-item"><input type="checkbox" name="emergency" value="抽搐"><span>全身发抖或抽搐</span></label>
-          <label class="check-item"><input type="checkbox" name="emergency" value="呼吸困难"><span>呼吸困难、张口喘气或舌头发紫</span></label>
-          <label class="check-item"><input type="checkbox" name="emergency" value="站不起来"><span>突然站不起来、无法行走或明显瘫软</span></label>
-          <label class="check-item"><input type="checkbox" name="emergency" value="叫不醒"><span>叫不醒、失去意识或反应极弱</span></label>
-          <label class="check-item"><input type="checkbox" name="emergency" value="大量出血"><span>大量出血或持续按压仍无法止血</span></label>
+        <div class="page-card-head">
+          <div>
+            <p class="card-kicker">SAFETY CHECK</p>
+            <h2 id="step-one-title" tabindex="-1">此刻有没有危险信号？</h2>
+            <p class="card-intro">只要符合一项，就先停止线上填写。下面的判断不依赖 AI，也不会等待模型回复。</p>
+          </div>
         </div>
-        <div class="safety-note">如无法判断是否属于紧急情况，优先电话咨询附近宠物医院；不要等待本工具给出结论。</div>
+
+        <div class="signal-list" role="group" aria-label="猫狗危险信号">
+          <label class="signal-card"><input type="checkbox" name="emergency" value="明显呼吸费力、猫张口呼吸或舌头牙龈发紫"><span><strong>呼吸明显异常</strong><small>呼吸费力、持续异常喘气；猫张口呼吸；舌头或牙龈发紫</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="持续抽搐、反复抽搐或意识异常"><span><strong>抽搐或意识异常</strong><small>持续/反复抽搐、叫不醒、反应极弱或突然倒下</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="突然无法站立、无法行走或明显瘫软"><span><strong>突然无法站立</strong><small>无法行走、明显瘫软或突然出现瘫痪表现</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="大量出血或持续按压仍无法止血"><span><strong>大量或止不住的出血</strong><small>血流不止，或持续按压仍无法止血</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="频繁用力排尿却只有几滴或完全无尿"><span><strong>用力却尿不出来</strong><small>频繁蹲猫砂盆、只有几滴或完全无尿，尤其是公猫</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="腹部突然胀大并反复干呕吐不出来"><span><strong>突然腹胀并持续干呕</strong><small>腹部明显鼓起，同时反复干呕但吐不出来</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="车撞、高处坠落、严重咬伤或异物卡喉"><span><strong>严重外伤或卡喉</strong><small>车撞、高处坠落、严重咬伤、异物卡喉或疑似窒息</small></span></label>
+          <label class="signal-card"><input type="checkbox" name="emergency" value="状态快速恶化、疑似中暑或中毒"><span><strong>状态快速恶化</strong><small>越来越虚弱、疑似中暑/中毒，或呕吐腹泻到无法留住水</small></span></label>
+        </div>
+
+        <div class="safety-note" id="selectedEmergency" role="alert" hidden>已勾选危险信号。请立即查看联系医院和出发准备步骤，不要继续等待线上分析。</div>
+
+        <div class="choice-stack" id="triageConfirmationGroup" role="radiogroup" aria-label="危险信号确认">
+          <label class="choice-card"><input type="radio" name="triageConfirmation" value="none"><span><strong>以上情况目前都没有</strong><small>我已经逐项确认，可以继续整理资料</small></span></label>
+          <label class="choice-card"><input type="radio" name="triageConfirmation" value="unsure"><span><strong>我不确定是否属于危险情况</strong><small>拿不准时，先电话咨询附近宠物医院更稳妥</small></span></label>
+        </div>
+        <div id="stepOneError" class="error-state" role="alert" hidden></div>
         <div class="button-row">
-          <button class="button" type="button" data-next>以上都确认了，继续</button>
+          <button class="button" id="stepOneNext" type="button" data-next disabled>确认后继续</button>
         </div>
       </section>
 
       <section class="page-card form-step" data-step="2" aria-labelledby="step-two-title" hidden>
-        <h2 id="step-two-title">告诉我们宠物的基本情况</h2>
-        <p class="card-intro">这些信息会影响风险判断。暂时不知道的内容可以选择“不知道”。</p>
+        <div class="page-card-head">
+          <div>
+            <p class="card-kicker">PATIENT PROFILE</p>
+            <h2 id="step-two-title" tabindex="-1">宠物的基本情况</h2>
+            <p class="card-intro">没有把握的内容请留空或选择“不确定”，不要用猜测的数据代替。</p>
+          </div>
+        </div>
         <div class="field-grid">
           <div class="field">
             <label for="petType">种类</label>
-            <select id="petType" name="petType">
-              <option value="猫">猫</option>
-              <option value="狗">狗</option>
-            </select>
+            <select id="petType" name="petType" required><option value="" selected disabled>请选择</option><option value="猫">猫</option><option value="狗">狗</option></select>
           </div>
-          <div class="field">
-            <label for="petBreed">品种（选填）</label>
-            <input id="petBreed" name="petBreed" type="text" maxlength="40" placeholder="如：英短、金毛" autocomplete="off">
-          </div>
-          <div class="field">
-            <label for="petAge">年龄</label>
-            <input id="petAge" name="petAge" type="number" value="1" min="0" max="40" step="1" inputmode="decimal" required>
-          </div>
-          <div class="field">
-            <label for="petAgeUnit">年龄单位</label>
-            <select id="petAgeUnit" name="petAgeUnit">
-              <option value="岁">岁</option>
-              <option value="个月">个月</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="petWeight">体重（kg）</label>
-            <input id="petWeight" name="petWeight" type="number" value="5" min="0.1" max="150" step="0.1" inputmode="decimal" required>
-            <small>不知道准确体重时，可填写最近一次称重结果。</small>
-          </div>
-          <div class="field">
-            <label for="petGender">性别</label>
-            <select id="petGender" name="petGender">
-              <option value="男孩">男孩</option>
-              <option value="女孩">女孩</option>
-              <option value="不知道">不知道</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="petNeutered">是否绝育</label>
-            <select id="petNeutered" name="petNeutered">
-              <option value="是">是</option>
-              <option value="否">否</option>
-              <option value="不知道">不知道</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="petHistory">基础疾病或过敏史（选填）</label>
-            <textarea id="petHistory" name="petHistory" maxlength="300" placeholder="如：慢性肾病、对某种药物过敏；没有可不填"></textarea>
-          </div>
+          <div class="field"><label for="petBreed">品种（选填）</label><input id="petBreed" name="petBreed" type="text" maxlength="40" placeholder="如：英短、金毛；不知道可留空" autocomplete="off"></div>
+          <div class="field"><label for="petAge">年龄（选填）</label><input id="petAge" name="petAge" type="number" min="0" max="480" step="1" inputmode="numeric" placeholder="不知道可留空"></div>
+          <div class="field"><label for="petAgeUnit">年龄单位</label><select id="petAgeUnit" name="petAgeUnit"><option value="岁">岁</option><option value="个月">个月</option></select></div>
+          <div class="field full"><label for="petWeight">体重 kg（选填）</label><input id="petWeight" name="petWeight" type="number" min="0.1" max="150" step="0.1" inputmode="decimal" placeholder="填写最近一次称重结果；不知道可留空"><small>体重未知不会阻断症状分流，但结果会提示这项信息缺失。</small></div>
+          <div class="field"><label for="petGender">性别</label><select id="petGender" name="petGender"><option value="" selected disabled>请选择</option><option value="公">公</option><option value="母">母</option><option value="不确定">不确定</option></select></div>
+          <div class="field"><label for="petNeutered">是否绝育</label><select id="petNeutered" name="petNeutered"><option value="" selected disabled>请选择</option><option value="是">是</option><option value="否">否</option><option value="不确定">不确定</option></select></div>
+          <div class="field full"><label for="petHistory">基础疾病、正在用药或过敏史（选填）</label><textarea id="petHistory" name="petHistory" maxlength="300" placeholder="如：慢性肾病、正在使用某种药、对某种药物过敏；不知道可写“不确定”"></textarea></div>
         </div>
+        <div id="stepTwoError" class="error-state" role="alert" hidden></div>
         <div class="button-row">
-          <button class="button-secondary" type="button" data-back>上一步</button>
+          <button class="button-secondary" type="button" data-back>返回上一步</button>
           <button class="button" type="button" data-next>继续填写症状</button>
         </div>
       </section>
 
       <section class="page-card form-step" data-step="3" aria-labelledby="step-three-title" hidden>
-        <h2 id="step-three-title">描述这次的症状</h2>
-        <p class="card-intro">尽量写清楚“什么时候开始、发生了什么、有没有变严重”。</p>
-        <div class="field-grid">
-          <div class="field full">
-            <label for="symptom">主要症状</label>
-            <textarea id="symptom" name="symptom" maxlength="500" placeholder="如：今天早上开始反复呕吐，精神比平时差" required></textarea>
-          </div>
-          <div class="field full">
-            <label for="duration">持续多久了</label>
-            <select id="duration" name="duration">
-              <option value="今天才有">今天才有</option>
-              <option value="2-3天">2–3 天</option>
-              <option value="超过一周">超过一周</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="eating">进食情况</label>
-            <select id="eating" name="eating">
-              <option value="正常吃">正常吃</option>
-              <option value="吃得少">吃得少</option>
-              <option value="完全不吃">完全不吃</option>
-              <option value="不确定">不确定</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="drinking">饮水情况</label>
-            <select id="drinking" name="drinking">
-              <option value="正常喝">正常喝</option>
-              <option value="喝得少">喝得少</option>
-              <option value="完全不喝">完全不喝</option>
-              <option value="不确定">不确定</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="toilet">大小便情况</label>
-            <select id="toilet" name="toilet">
-              <option value="正常">正常</option>
-              <option value="减少">减少</option>
-              <option value="完全没有">完全没有</option>
-              <option value="形状/颜色异常">形状或颜色异常</option>
-              <option value="不确定">不确定</option>
-            </select>
-          </div>
-          <div class="field full">
-            <label for="other">其他异常（选填）</label>
-            <textarea id="other" name="other" maxlength="300" placeholder="如：没精神、躲起来、呕吐或叫声异常"></textarea>
-          </div>
-          <div class="field full">
-            <label for="recent">近期特殊情况（选填）</label>
-            <textarea id="recent" name="recent" maxlength="300" placeholder="如：换粮、外出、接触其他动物或使用新药"></textarea>
+        <div class="page-card-head">
+          <div>
+            <p class="card-kicker">CURRENT CONDITION</p>
+            <h2 id="step-three-title" tabindex="-1">这次发生了什么？</h2>
+            <p class="card-intro">时间、变化趋势、吃喝和排尿通常比“看起来不舒服”更能帮助兽医快速理解情况。</p>
           </div>
         </div>
 
-        <div class="info-note">
-          <strong>提交前确认：</strong>
+        <div class="field-grid">
+          <div class="field full"><label for="symptom">主要症状</label><textarea id="symptom" name="symptom" maxlength="500" placeholder="如：昨晚开始软便两次，精神和食欲基本正常，没有呕吐" required></textarea></div>
+          <div class="field"><label for="duration">大约什么时候开始</label><select id="duration" name="duration" required><option value="" selected disabled>请选择</option><option value="1小时内">1 小时内</option><option value="1-6小时">1–6 小时</option><option value="6-24小时">6–24 小时</option><option value="2-3天">2–3 天</option><option value="4-7天">4–7 天</option><option value="超过一周">超过一周</option><option value="不确定">不确定</option></select></div>
+          <div class="field"><label for="trend">变化趋势</label><select id="trend" name="trend" required><option value="" selected disabled>请选择</option><option value="正在加重">正在加重</option><option value="基本不变">基本不变</option><option value="有所缓解">有所缓解</option><option value="反复出现">反复出现</option><option value="不确定">不确定</option></select></div>
+          <div class="field full"><label for="frequency">频率或次数（选填）</label><input id="frequency" name="frequency" type="text" maxlength="80" placeholder="如：今天呕吐 3 次；每隔 20 分钟咳一次"></div>
+          <div class="field"><label for="eating">进食情况</label><select id="eating" name="eating" required><option value="" selected disabled>请选择</option><option value="正常">正常</option><option value="吃得比平时少">吃得比平时少</option><option value="完全不吃">完全不吃</option><option value="不确定">不确定</option></select></div>
+          <div class="field"><label for="drinking">饮水情况</label><select id="drinking" name="drinking" required><option value="" selected disabled>请选择</option><option value="正常">正常</option><option value="喝得比平时少">喝得比平时少</option><option value="明显增多">明显增多</option><option value="完全不喝">完全不喝</option><option value="喝水也会吐">喝水也会吐</option><option value="不确定">不确定</option></select></div>
+          <div class="field"><label for="urination">排尿情况</label><select id="urination" name="urination" required><option value="" selected disabled>请选择</option><option value="正常">正常</option><option value="次数增多">次数增多</option><option value="用力但只有很少">用力但只有很少</option><option value="完全无尿">完全无尿</option><option value="血尿或颜色异常">血尿或颜色异常</option><option value="不确定">不确定</option></select></div>
+          <div class="field"><label for="defecation">排便情况</label><select id="defecation" name="defecation" required><option value="" selected disabled>请选择</option><option value="正常">正常</option><option value="腹泻或软便">腹泻或软便</option><option value="便秘或排便困难">便秘或排便困难</option><option value="便血或黑便">便血或黑便</option><option value="没有观察到">没有观察到</option><option value="不确定">不确定</option></select></div>
+          <div class="field full"><label for="other">其他异常（选填）</label><textarea id="other" name="other" maxlength="300" placeholder="如：没精神、躲起来、叫声异常、触碰某处会躲避"></textarea></div>
+          <div class="field full"><label for="recent">近期特殊情况（选填）</label><textarea id="recent" name="recent" maxlength="300" placeholder="如：换粮、外出、接触其他动物、打疫苗、使用新药或可能误食"></textarea></div>
+        </div>
+
+        <div class="section-block" style="margin-top:22px">
+          <div class="info-note">
+            <strong>提交前再确认一次</strong>
+            <div class="choice-stack" role="radiogroup" aria-label="提交前危险信号确认">
+              <label class="choice-card"><input type="radio" name="finalSafety" value="none"><span><strong>目前没有第 1 步列出的危险信号</strong><small>如果情况变化，我会停止等待并联系兽医</small></span></label>
+              <label class="choice-card"><input type="radio" name="finalSafety" value="unsure"><span><strong>现在出现了新异常，或我拿不准</strong><small>优先查看紧急行动步骤，不提交给模型</small></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-note" style="margin-top:14px">
+          <strong>提交内容预览</strong>
           <div id="consultSummary" class="summary-list" aria-live="polite"></div>
         </div>
+
+        <div class="privacy-note" id="dataProcessing" style="margin-top:14px">
+          <strong>数据处理说明</strong><br>
+          <span id="dataProcessingText">本次问诊资料、补充回答和结果仅保存在当前浏览器，并于 24 小时后过期。点击提交后，宠物资料、症状描述和后续回答会经本地代理发送给 DeepSeek API 生成辅助提示。请不要填写宠物主姓名、电话、地址或证件等无关个人信息。</span>
+          <label class="privacy-consent" id="aiConsentLabel"><input id="aiConsent" type="checkbox"><span>我了解上述处理方式，并同意为本次风险分流发送这些宠物健康信息。</span></label>
+        </div>
+
         <div id="formError" class="error-state" role="alert" hidden></div>
         <div class="button-row">
-          <button class="button-secondary" type="button" data-back>上一步</button>
-          <button class="button" type="submit">开始整理问诊信息</button>
+          <button class="button-secondary" type="button" data-back>返回上一步</button>
+          <button class="button" type="submit">生成就诊沟通信息</button>
         </div>
       </section>
     </form>
 
-    <p class="footer-note">本工具不提供诊断或处方；宠物状态明显恶化时请直接联系执业兽医。</p>
+    <p class="footer-note"><span>本工具不提供诊断或处方；状态明显恶化时请立即联系执业兽医。</span></p>
   </main>
 
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=20260828"></script>
   <script>
     (function () {
       "use strict";
 
-      const form = document.getElementById("consultForm");
+      const { byId, clearConsultData, detectDangerSignals, getServiceHealth, getStoredJson, removeStoredJson, setStoredJson, storeEmergencySignals, valueOrUnknown } = window.MiguApp;
+      const form = byId("consultForm");
       const steps = Array.from(document.querySelectorAll(".form-step"));
-      const labels = Array.from(document.querySelectorAll("[data-step-label]"));
-      const errorBox = document.getElementById("formError");
+      const stepLabels = Array.from(document.querySelectorAll(".step-item"));
+      const emergencyInputs = Array.from(document.querySelectorAll('input[name="emergency"]'));
       const draftKey = "consultDraft";
+      const stepHints = ["先排除不能等待的情况", "只填知道的资料，不需要猜", "整理这次症状和变化趋势"];
       let currentStep = 1;
+      let aiConfigured = true;
 
       function checkedEmergencySignals() {
-        return Array.from(document.querySelectorAll('input[name="emergency"]:checked'))
-          .map((input) => input.value);
+        return emergencyInputs.filter((input) => input.checked).map((input) => input.value);
+      }
+
+      function radioValue(name) {
+        return document.querySelector(`input[name="${name}"]:checked`)?.value || "";
       }
 
       function readDraft() {
         return {
+          currentStep,
           emergency: checkedEmergencySignals(),
-          petType: document.getElementById("petType").value,
-          petBreed: document.getElementById("petBreed").value.trim(),
-          petAge: document.getElementById("petAge").value,
-          petAgeUnit: document.getElementById("petAgeUnit").value,
-          petWeight: document.getElementById("petWeight").value,
-          petGender: document.getElementById("petGender").value,
-          petNeutered: document.getElementById("petNeutered").value,
-          petHistory: document.getElementById("petHistory").value.trim(),
-          symptom: document.getElementById("symptom").value.trim(),
-          duration: document.getElementById("duration").value,
-          eating: document.getElementById("eating").value,
-          drinking: document.getElementById("drinking").value,
-          toilet: document.getElementById("toilet").value,
-          other: document.getElementById("other").value.trim(),
-          recent: document.getElementById("recent").value.trim()
+          triageConfirmation: radioValue("triageConfirmation"),
+          petType: byId("petType").value,
+          petBreed: byId("petBreed").value.trim(),
+          petAge: byId("petAge").value.trim(),
+          petAgeUnit: byId("petAgeUnit").value,
+          petWeight: byId("petWeight").value.trim(),
+          petGender: byId("petGender").value,
+          petNeutered: byId("petNeutered").value,
+          petHistory: byId("petHistory").value.trim(),
+          symptom: byId("symptom").value.trim(),
+          duration: byId("duration").value,
+          trend: byId("trend").value,
+          frequency: byId("frequency").value.trim(),
+          eating: byId("eating").value,
+          drinking: byId("drinking").value,
+          urination: byId("urination").value,
+          defecation: byId("defecation").value,
+          other: byId("other").value.trim(),
+          recent: byId("recent").value.trim(),
+          finalSafety: radioValue("finalSafety"),
+          aiConsent: byId("aiConsent").checked,
         };
       }
 
       function saveDraft() {
-        MiguApp.setStoredJson(draftKey, readDraft());
+        return setStoredJson(draftKey, readDraft());
+      }
+
+      function setRadio(name, value) {
+        if (!value) return;
+        const control = document.querySelector(`input[name="${name}"][value="${value}"]`);
+        if (control) control.checked = true;
       }
 
       function restoreDraft() {
-        const draft = MiguApp.getStoredJson(draftKey, null);
-        if (!draft || typeof draft !== "object") return;
+        const draft = getStoredJson(draftKey, null);
+        if (!draft || typeof draft !== "object") return 1;
 
         Object.entries(draft).forEach(([key, value]) => {
-          if (key === "emergency" || value === null || value === undefined) return;
-          const control = document.getElementById(key);
-          if (control) control.value = String(value);
+          if (["currentStep", "emergency", "triageConfirmation", "finalSafety", "aiConsent"].includes(key)) return;
+          const control = byId(key);
+          if (control && value !== null && value !== undefined) control.value = String(value);
         });
-
         if (Array.isArray(draft.emergency)) {
           const selected = new Set(draft.emergency);
-          document.querySelectorAll('input[name="emergency"]').forEach((input) => {
-            input.checked = selected.has(input.value);
-          });
+          emergencyInputs.forEach((input) => { input.checked = selected.has(input.value); });
         }
+        setRadio("triageConfirmation", draft.triageConfirmation);
+        setRadio("finalSafety", draft.finalSafety);
+        byId("aiConsent").checked = Boolean(draft.aiConsent);
+        return Math.min(3, Math.max(1, Number(draft.currentStep) || 1));
       }
 
-      function setStep(stepNumber) {
+      function setStep(stepNumber, focusHeading = true) {
         currentStep = Math.min(3, Math.max(1, stepNumber));
-        steps.forEach((step) => {
-          step.hidden = Number(step.dataset.step) !== currentStep;
-        });
-        labels.forEach((label) => {
-          const active = Number(label.dataset.stepLabel) === currentStep;
+        steps.forEach((step) => { step.hidden = Number(step.dataset.step) !== currentStep; });
+        stepLabels.forEach((label, index) => {
+          const active = index + 1 === currentStep;
           label.classList.toggle("active", active);
           if (active) label.setAttribute("aria-current", "step");
           else label.removeAttribute("aria-current");
         });
+        byId("progressBar").style.width = `${currentStep * 33.333}%`;
+        byId("stepMeta").textContent = `第 ${currentStep} 步，共 3 步`;
+        byId("stepHint").textContent = stepHints[currentStep - 1];
         if (currentStep === 3) updateSummary();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        saveDraft();
+        if (focusHeading) {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          const heading = steps[currentStep - 1].querySelector("h2");
+          window.setTimeout(() => heading?.focus({ preventScroll: true }), 220);
+        }
       }
 
-      function showError(message, control) {
-        errorBox.textContent = message;
-        errorBox.hidden = false;
+      function showError(id, message, control) {
+        const box = byId(id);
+        box.textContent = message;
+        box.hidden = false;
         if (control) control.focus();
       }
 
-      function clearError() {
-        errorBox.textContent = "";
-        errorBox.hidden = true;
+      function clearError(id) {
+        const box = byId(id);
+        box.textContent = "";
+        box.hidden = true;
+      }
+
+      function refreshEmergencyState() {
+        const signals = checkedEmergencySignals();
+        const hasSignals = signals.length > 0;
+        byId("selectedEmergency").hidden = !hasSignals;
+        byId("triageConfirmationGroup").hidden = hasSignals;
+        const next = byId("stepOneNext");
+        next.disabled = !hasSignals && !radioValue("triageConfirmation");
+        next.className = hasSignals ? "button-danger" : "button";
+        next.textContent = hasSignals ? "立即查看就医步骤" : radioValue("triageConfirmation") === "unsure" ? "先查看联系医院步骤" : "以上均无，继续";
       }
 
       function validatePetInfo() {
-        const age = document.getElementById("petAge");
-        const weight = document.getElementById("petWeight");
-        const ageNumber = Number(age.value);
-        const weightNumber = Number(weight.value);
-
-        if (age.value === "" || !Number.isFinite(ageNumber) || ageNumber < 0 || ageNumber > 40) {
-          window.alert("请填写 0–40 之间的宠物年龄。");
-          age.focus();
+        clearError("stepTwoError");
+        if (!byId("petType").value) {
+          showError("stepTwoError", "请选择猫或狗。目前这个版本暂不支持其他宠物。", byId("petType"));
           return false;
         }
-        if (weight.value === "" || !Number.isFinite(weightNumber) || weightNumber <= 0 || weightNumber > 150) {
-          window.alert("请填写 0.1–150 kg 之间的宠物体重。");
-          weight.focus();
+        const age = byId("petAge").value.trim();
+        const ageNumber = Number(age);
+        const ageLimit = byId("petAgeUnit").value === "个月" ? 480 : 40;
+        if (age && (!Number.isFinite(ageNumber) || ageNumber < 0 || ageNumber > ageLimit)) {
+          showError("stepTwoError", `请填写 0–${ageLimit} 之间的年龄，或留空表示不确定。`, byId("petAge"));
+          return false;
+        }
+        const weight = byId("petWeight").value.trim();
+        const weightNumber = Number(weight);
+        if (weight && (!Number.isFinite(weightNumber) || weightNumber < 0.1 || weightNumber > 150)) {
+          showError("stepTwoError", "请填写 0.1–150 kg 之间的体重，或留空表示不确定。", byId("petWeight"));
           return false;
         }
         return true;
@@ -279,29 +310,61 @@
         const key = document.createElement("span");
         const content = document.createElement("span");
         key.textContent = label;
-        content.textContent = value;
+        content.textContent = valueOrUnknown(value);
         row.append(key, content);
-        document.getElementById("consultSummary").appendChild(row);
+        byId("consultSummary").appendChild(row);
       }
 
       function updateSummary() {
         const data = readDraft();
-        const summary = document.getElementById("consultSummary");
-        summary.replaceChildren();
-        const identity = [data.petType, data.petBreed || "品种未知", data.petAge + data.petAgeUnit, data.petWeight + " kg"].join(" · ");
-        addSummaryRow("宠物", identity);
-        addSummaryRow("主要症状", data.symptom || "尚未填写");
-        addSummaryRow("持续时间", data.duration);
+        byId("consultSummary").replaceChildren();
+        const pet = [data.petType, data.petBreed, data.petAge ? `${data.petAge}${data.petAgeUnit}` : "", data.petWeight ? `${data.petWeight} kg` : ""].filter(Boolean).join(" · ");
+        addSummaryRow("宠物", pet || "不确定");
+        addSummaryRow("性别 / 绝育", [data.petGender, data.petNeutered ? `绝育：${data.petNeutered}` : ""].filter(Boolean).join(" · "));
+        addSummaryRow("病史 / 过敏", data.petHistory);
+        addSummaryRow("主要症状", data.symptom);
+        addSummaryRow("时间 / 趋势", [data.duration, data.trend].filter(Boolean).join(" · "));
+        addSummaryRow("频率", data.frequency);
+        addSummaryRow("进食 / 饮水", [data.eating, data.drinking].filter(Boolean).join(" · "));
+        addSummaryRow("排尿 / 排便", [data.urination, data.defecation].filter(Boolean).join(" · "));
+        addSummaryRow("其他异常", data.other);
+        addSummaryRow("近期变化", data.recent);
       }
+
+      function sendToEmergency(signals) {
+        storeEmergencySignals(signals.length ? signals : ["当前情况无法确认是否紧急"]);
+        window.location.href = "emergency.html";
+      }
+
+      emergencyInputs.forEach((input) => input.addEventListener("change", () => {
+        if (input.checked) {
+          document.querySelectorAll('input[name="triageConfirmation"]').forEach((radio) => { radio.checked = false; });
+          const signals = checkedEmergencySignals();
+          saveDraft();
+          sendToEmergency(signals);
+          return;
+        }
+        clearError("stepOneError");
+        refreshEmergencyState();
+        saveDraft();
+      }));
+
+      document.querySelectorAll('input[name="triageConfirmation"]').forEach((radio) => radio.addEventListener("change", () => {
+        emergencyInputs.forEach((input) => { input.checked = false; });
+        clearError("stepOneError");
+        refreshEmergencyState();
+        saveDraft();
+      }));
 
       document.querySelectorAll("[data-next]").forEach((button) => {
         button.addEventListener("click", () => {
-          saveDraft();
           if (currentStep === 1) {
             const signals = checkedEmergencySignals();
-            if (signals.length) {
-              MiguApp.setStoredJson("emergencySymptoms", signals);
-              window.location.href = "emergency.html";
+            const confirmation = radioValue("triageConfirmation");
+            if (signals.length) return sendToEmergency(signals);
+            if (confirmation === "unsure") return sendToEmergency(["无法确认是否存在危险信号"]);
+            if (confirmation !== "none") {
+              showError("stepOneError", "请选择“以上都没有”，或勾选正在出现的危险信号。", null);
               return;
             }
           }
@@ -312,8 +375,7 @@
 
       document.querySelectorAll("[data-back]").forEach((button) => {
         button.addEventListener("click", () => {
-          saveDraft();
-          clearError();
+          clearError("formError");
           setStep(currentStep - 1);
         });
       });
@@ -329,43 +391,125 @@
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
-        clearError();
-        if (!validatePetInfo()) {
-          setStep(2);
-          return;
-        }
-
+        clearError("formError");
+        if (!validatePetInfo()) return setStep(2);
         const data = readDraft();
-        if (!data.symptom) {
-          showError("请填写主要症状，并尽量说明开始时间和变化。", document.getElementById("symptom"));
-          return;
+        const required = [
+          [data.symptom, "请填写主要症状。", byId("symptom")],
+          [data.duration, "请选择大约开始时间。", byId("duration")],
+          [data.trend, "请选择症状变化趋势。", byId("trend")],
+          [data.eating, "请选择进食情况。", byId("eating")],
+          [data.drinking, "请选择饮水情况。", byId("drinking")],
+          [data.urination, "请选择排尿情况。", byId("urination")],
+          [data.defecation, "请选择排便情况。", byId("defecation")],
+          [data.finalSafety, "请再次确认目前是否出现危险信号。", null],
+        ];
+        const missing = required.find(([value]) => !value);
+        if (missing) return showError("formError", missing[1], missing[2]);
+
+        if (data.finalSafety === "unsure") return sendToEmergency(["提交前发现新异常或无法确认是否紧急"]);
+        const freeTextSignals = detectDangerSignals([data.symptom, data.other, data.recent].join("。"));
+        if (["用力但只有很少", "完全无尿"].includes(data.urination)) {
+          freeTextSignals.push({ id: "urinary", label: "用力排尿却只有很少，或完全无尿" });
         }
+        if (freeTextSignals.length) return sendToEmergency(freeTextSignals);
+        if (aiConfigured && !data.aiConsent) return showError("formError", "请先阅读数据处理说明，并确认是否同意为本次分流发送这些宠物健康信息。", byId("aiConsent"));
 
         const consultData = {
           petType: data.petType,
-          petBreed: data.petBreed || "未知",
-          petAge: data.petAge,
-          petAgeUnit: data.petAgeUnit,
-          petWeight: data.petWeight,
-          petGender: data.petGender,
-          petNeutered: data.petNeutered,
-          petHistory: data.petHistory || "无",
+          petBreed: data.petBreed || "不确定",
+          petAge: data.petAge || "不确定",
+          petAgeUnit: data.petAge ? data.petAgeUnit : "",
+          petWeight: data.petWeight || "不确定",
+          petGender: data.petGender || "不确定",
+          petNeutered: data.petNeutered || "不确定",
+          petHistory: data.petHistory || "未提供",
           symptom: data.symptom,
           duration: data.duration,
+          trend: data.trend,
+          frequency: data.frequency || "未提供",
           eating: data.eating,
           drinking: data.drinking,
-          toilet: data.toilet,
-          other: data.other || "无",
-          recent: data.recent || "无"
+          urination: data.urination,
+          defecation: data.defecation,
+          other: data.other || "未提供",
+          recent: data.recent || "未提供",
+          aiProcessingAuthorized: aiConfigured && data.aiConsent,
+          consentAt: aiConfigured && data.aiConsent ? new Date().toISOString() : "",
+          processingMode: aiConfigured && data.aiConsent ? "ai-authorized" : "local-only",
+          createdAt: new Date().toISOString(),
         };
-
-        MiguApp.setStoredJson("consultData", consultData);
-        saveDraft();
+        const storedCase = setStoredJson("consultData", consultData);
+        const storedAnswers = setStoredJson("consultAnswers", []);
+        removeStoredJson("consultResult");
+        if (!storedCase || !storedAnswers) {
+          return showError("formError", "当前浏览器无法保存本次问诊资料。请检查隐私浏览或存储设置后重试。", null);
+        }
         window.location.href = "chat.html";
       });
 
-      restoreDraft();
-      setStep(1);
+      byId("demoButton").addEventListener("click", () => {
+        form.reset();
+        byId("petType").value = "狗";
+        byId("petBreed").value = "柯基";
+        byId("petAge").value = "4";
+        byId("petAgeUnit").value = "岁";
+        byId("petWeight").value = "11.2";
+        byId("petGender").value = "公";
+        byId("petNeutered").value = "是";
+        byId("petHistory").value = "未发现已知基础疾病或药物过敏";
+        byId("symptom").value = "昨晚开始软便两次，精神和食欲基本正常，没有呕吐";
+        byId("duration").value = "6-24小时";
+        byId("trend").value = "基本不变";
+        byId("frequency").value = "截至目前软便 2 次";
+        byId("eating").value = "正常";
+        byId("drinking").value = "正常";
+        byId("urination").value = "正常";
+        byId("defecation").value = "腹泻或软便";
+        byId("recent").value = "前天尝试了少量新零食";
+        document.querySelector('input[name="triageConfirmation"][value="none"]').checked = true;
+        document.querySelector('input[name="finalSafety"][value="none"]').checked = true;
+        byId("aiConsent").checked = false;
+        refreshEmergencyState();
+        setStep(3);
+      });
+
+      byId("clearDraft").addEventListener("click", () => {
+        const cleared = clearConsultData();
+        form.reset();
+        refreshEmergencyState();
+        setStep(1, false);
+        removeStoredJson(draftKey);
+        const button = byId("clearDraft");
+        const original = "清除本次问诊";
+        button.textContent = cleared ? "本次问诊已清除" : "当前浏览器无法清除";
+        button.disabled = true;
+        window.setTimeout(() => {
+          button.textContent = original;
+          button.disabled = false;
+        }, 1800);
+      });
+
+      const pageQuery = new URLSearchParams(window.location.search);
+      if (pageQuery.get("new") === "1") {
+        clearConsultData();
+        window.history.replaceState(null, "", "consult.html");
+      }
+      if (pageQuery.get("demo") === "1") {
+        byId("demoButton").hidden = false;
+      }
+      getServiceHealth().then((health) => {
+        aiConfigured = Boolean(health.configured ?? health.modelConfigured);
+        if (aiConfigured) return;
+        byId("dataProcessingText").textContent = "当前没有配置 AI。提交后只会在本机代理中触发固定安全问题和保守提示，不会发送给 DeepSeek；本次问诊资料、补充回答和结果仍仅保存在当前浏览器，并于 24 小时后过期。";
+        byId("aiConsent").checked = false;
+        byId("aiConsentLabel").hidden = true;
+      }).catch(() => {
+        aiConfigured = false;
+      });
+      const restoredStep = restoreDraft();
+      refreshEmergencyState();
+      setStep(restoredStep, false);
     })();
   </script>
 </body>
